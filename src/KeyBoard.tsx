@@ -29,7 +29,17 @@ const Keys = [
   "z",
 ];
 
-export default function KeyBoard() {
+type TKeyboardProps = {
+  activeLetter: string[];
+  inactiveLetter: string[];
+  addGuessedLetter: (letter: string) => void;
+};
+
+export default function KeyBoard({
+  activeLetter,
+  inactiveLetter,
+  addGuessedLetter,
+}: TKeyboardProps) {
   return (
     <div
       style={{
@@ -39,8 +49,17 @@ export default function KeyBoard() {
       }}
     >
       {Keys.map((key) => {
+        const isActive = activeLetter.includes(key);
+        const isInActive = inactiveLetter.includes(key);
         return (
-          <button className={`${styles.btn}`} key={key}>
+          <button
+            disabled={isInActive || isActive}
+            onClick={() => addGuessedLetter(key)}
+            className={`${styles.btn} ${isActive ? styles.active : ""} ${
+              isInActive ? styles.inactive : ""
+            }`}
+            key={key}
+          >
             {key}
           </button>
         );
