@@ -30,12 +30,14 @@ const Keys = [
 ];
 
 type TKeyboardProps = {
+  disabled: boolean;
   activeLetter: string[];
   inactiveLetter: string[];
   addGuessedLetter: (letter: string) => void;
 };
 
 export default function KeyBoard({
+  disabled = false,
   activeLetter,
   inactiveLetter,
   addGuessedLetter,
@@ -53,7 +55,7 @@ export default function KeyBoard({
         const isInActive = inactiveLetter.includes(key);
         return (
           <button
-            disabled={isInActive || isActive}
+            disabled={isInActive || isActive || disabled}
             onClick={() => addGuessedLetter(key)}
             className={`${styles.btn} ${isActive ? styles.active : ""} ${
               isInActive ? styles.inactive : ""
