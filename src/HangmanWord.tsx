@@ -1,5 +1,4 @@
 type THangmanWordProps = {
-  reveal?: boolean;
   guessedLetters: string[];
   wordToGuess: string;
 };
@@ -7,7 +6,6 @@ type THangmanWordProps = {
 export default function HangmanWord({
   guessedLetters,
   wordToGuess,
-  reveal = false,
 }: THangmanWordProps) {
   return (
     <div
@@ -24,12 +22,9 @@ export default function HangmanWord({
         <span style={{ borderBottom: ".1em solid black" }} key={index}>
           <span
             style={{
-              visibility:
-                guessedLetters.includes(letter) || reveal
-                  ? "visible"
-                  : "hidden",
-              color:
-                !guessedLetters.includes(letter) && reveal ? "red" : "black",
+              visibility: guessedLetters.includes(letter)
+                ? "visible"
+                : "hidden",
             }}
           >
             {letter}
